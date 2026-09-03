@@ -1,5 +1,8 @@
 total_amount = 0
 total_discount = 0
+most_expensive = None
+cheapest = None
+highest_quantity = None
 
 print("Enter details for 5 products")
 
@@ -10,6 +13,20 @@ for i in range(1, 6):
     quantity = int(input("Quantity: "))
 
     amount = price * quantity
+
+    product = {
+        "id": product_id,
+        "name": name,
+        "price": price,
+        "quantity": quantity,
+    }
+
+    if most_expensive is None or price > most_expensive["price"]:
+        most_expensive = product
+    if cheapest is None or price < cheapest["price"]:
+        cheapest = product
+    if highest_quantity is None or quantity > highest_quantity["quantity"]:
+        highest_quantity = product
 
     if amount > 5000:
         discount_rate = 10
@@ -38,3 +55,9 @@ print("\n-----------------------------")
 print(f"Total Discount: {total_discount:.2f}")
 print(f"Total Bill: {total_amount:.2f}")
 print("-----------------------------")
+print(f"Most Expensive Product: {most_expensive['name']} ({most_expensive['price']:.2f})")
+print(f"Cheapest Product: {cheapest['name']} ({cheapest['price']:.2f})")
+print(
+    f"Highest Quantity Purchased: "
+    f"{highest_quantity['name']} ({highest_quantity['quantity']})"
+)
